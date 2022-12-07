@@ -1,44 +1,22 @@
-const entities = []
-
-var num_entities, max_dist_variation, max_hue_variation, baseSaturation, baseLight
-
+// fibonacciTree.js
 function setup() {
-  num_entities = Math.floor(random(10, 30))
-  max_dist_variation = 5
-  max_hue_variation = 1
-  baseSaturation = 80
-  baseLight = 80
+  const numSteps = 10
+  const xSpace = windowWidth/(numSteps+1)
 
   createCanvas(windowWidth, windowHeight)
 
-  for (let i = 0; i < num_entities; i++) {
-    entities.push([
-      random(windowWidth),
-      random(windowHeight),
-      random(windowWidth),
-      random(windowHeight),
-      random(100)
-    ])
-    colorMode(HSB, 100)
+  strokeWeight(3)
+  stroke('white')
+  background('black')
+
+  let fibonacci = [1, 1]
+  for (let i = 2; i < numSteps; i++) {
+    fibonacci.push(fibonacci[i-2] + fibonacci[i-1])
+
+    for (let j = 0; j < fibonacci[i]; j++) {
+      const ySpace = windowHeight/(fibonacci[i]+1)
+
+      point(xSpace*(i+1), ySpace*(j+1))
+    }
   }
-
-  frameRate(3)
-}
-
-function draw() {
-  background(255)
-  entities.forEach((entityProps, i) => {
-
-    // entityProps = [startX, startY, endX, endY, hue]
-    // make coordinates move
-    entities[i] = entityProps.map((prop, j) => (
-      (j < 4)
-        ? (prop + random(-1, 1)*max_dist_variation)
-        : (prop + random(-1, 1)*max_hue_variation)
-    ))
-
-    // drawLine
-    line(...entityProps.slice(0,4))
-    stroke(entityProps[4], baseSaturation, baseLight)
-  })
-}
+} 
