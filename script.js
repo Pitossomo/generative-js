@@ -1,59 +1,41 @@
-// fibonacciTree.js
+const toRadialCoordinates = (x,y) => [Math.sqrt(x**2 + y**2), Math.atan(y/x)]
+const toCartesianCoordinates = (r,angle) => [r*Math.cos(angle), r*Math.sin(angle)]
+const averagePoint = ([point1X, point1Y], [point2X, point2Y]) => (
+  [(point1X + point2X)/2, (point1Y + point2Y)/2]
+)
+
+// inscribedPolygons.js
 function setup() {
   createCanvas(windowWidth, windowHeight)
   background('black')
+
+  const NUM_VERTEX = 3
+  const NUM_POLYGONS = NUM_VERTEX*2
+  const INITIAL_ROTATION = Math.PI/2
+  const INITIAL_MARGIN = Math.max(Math.min(windowHeight,windowHeight)*0.10, 100)
+  const VERTEX_ROTATION = 2*Math.PI/NUM_VERTEX
+  const VERTEX_STEP = 1
+
   stroke('white')
+  strokeWeight(3)
 
-  const MAX_GENERATIONS = 15
-  const DX = windowWidth/(MAX_GENERATIONS+1)
-
-  class FibPoint {
-    constructor(age, root, generation, y) {
-      this.age = age
-      this.root = root
-      this.x = (generation+1)*DX
-      this.y = y
-
-      this.draw = () => {
-        if (!this.root) return; 
-        strokeWeight(this.age+1)
-        point(this.x, this.y)
-        strokeWeight(1)
-        line(this.root.x, this.root.y, this.x, this.y)
-      }
-    }
+  let points = [[]]
+  const ro = Math.min(windowHeight, windowWidth)/2 - INITIAL_MARGIN
+  for (let i = 0; i < NUM_VERTEX; i++) {
+    const point = toCartesianCoordinates(ro, VERTEX_ROTATION*i - INITIAL_ROTATION) 
+    points[0].push([point[0] + windowWidth/2, point[1] + windowHeight/2])
   }
 
-  const initialRoot = new FibPoint(
-    age = 0,
-    root = null,
-    generation = 0,
-    y = 1*windowHeight/2
-  )
-  initialRoot.draw()
-  let generations = [[initialRoot]]
-
-  for (let generation = 1; generation < MAX_GENERATIONS; generation++) {
-    let newGeneration = []
-    const totalParallels = (generation < 2) 
-      ? 1
-      : generations[generation-1].length + generations[generation-2].length
-
-    const dy = windowHeight/(totalParallels + 1)
-
-    generations[generation-1].forEach((root, j) => {
-      const parallelIndex = newGeneration.length + 1
-      const updatedPoint = new FibPoint(root.age + 1, root, generation, parallelIndex*dy)
-      newGeneration.push(updatedPoint)
-      updatedPoint.draw()
-
-      if (root.age > 0) {
-        const offspring = new FibPoint(0, root, generation, (parallelIndex+1)*dy)
-        newGeneration.push(offspring)
-        offspring.draw()
-      }
+  for (let j = 0; j < NUM_POLYGONS; j++) {
+    let newPoints = []
+    let prevPoints = points[j]
+    prevPoints.forEach((point, k) => {
+      const previousIndex = (prevPoints.length + k - VERTEX_STEP)%NUM_VERTEX 
+      const previousPoint = prevPoints[previousIndex]
+      line(previousPoint[0], previousPoint[1], point[0], point[1])
+      newPoints.push(averagePoint(previousPoint, point))
     })
-    generations.push(newGeneration)      
+    points.push(newPoints)
   }
 
   noLoop()
