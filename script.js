@@ -1,42 +1,22 @@
 const toRadialCoordinates = (x,y) => [Math.sqrt(x**2 + y**2), Math.atan(y/x)]
 const toCartesianCoordinates = (r,angle) => [r*Math.cos(angle), r*Math.sin(angle)]
-const averagePoint = ([point1X, point1Y], [point2X, point2Y]) => (
-  [(point1X + point2X)/2, (point1Y + point2Y)/2]
-)
 
-// inscribedPolygons.js
 function setup() {
   createCanvas(windowWidth, windowHeight)
   background('black')
-
-  const NUM_VERTEX = 3
-  const NUM_POLYGONS = NUM_VERTEX*2
-  const INITIAL_ROTATION = Math.PI/2
-  const INITIAL_MARGIN = Math.max(Math.min(windowHeight,windowHeight)*0.10, 100)
-  const VERTEX_ROTATION = 2*Math.PI/NUM_VERTEX
-  const VERTEX_STEP = 1
-
   stroke('white')
-  strokeWeight(3)
 
-  let points = [[]]
-  const ro = Math.min(windowHeight, windowWidth)/2 - INITIAL_MARGIN
-  for (let i = 0; i < NUM_VERTEX; i++) {
-    const point = toCartesianCoordinates(ro, VERTEX_ROTATION*i - INITIAL_ROTATION) 
-    points[0].push([point[0] + windowWidth/2, point[1] + windowHeight/2])
+  const NUM_POINTS = 100
+  const NUM_ROUNDS = 5
+
+  let point1 = [windowWidth/2, windowHeight/2]
+  for (let i = 0; i < NUM_POINTS; i++) {
+    point2 = toCartesianCoordinates(
+      Math.min(windowWidth,windowHeight)/2/100*i + windowWidth/2,
+      2*Math.PI*NUM_ROUNDS/NUM_POINTS + windowHeight/2
+    )
+    point(point1[0], point1[1], point2[0], point2[1])
+    point1 = [...point2]
   }
-
-  for (let j = 0; j < NUM_POLYGONS; j++) {
-    let newPoints = []
-    let prevPoints = points[j]
-    prevPoints.forEach((point, k) => {
-      const previousIndex = (prevPoints.length + k - VERTEX_STEP)%NUM_VERTEX 
-      const previousPoint = prevPoints[previousIndex]
-      line(previousPoint[0], previousPoint[1], point[0], point[1])
-      newPoints.push(averagePoint(previousPoint, point))
-    })
-    points.push(newPoints)
-  }
-
   noLoop()
 }
