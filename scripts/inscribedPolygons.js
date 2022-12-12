@@ -1,18 +1,25 @@
-const averagePoint = ([point1X, point1Y], [point2X, point2Y]) => (
-  [(point1X + point2X)/2, (point1Y + point2Y)/2]
-)
+const toRadialCoordinates = (x,y) => [Math.sqrt(x**2 + y**2), Math.atan(y/x)]
+const toCartesianCoordinates = (r,angle) => [r*Math.cos(angle), r*Math.sin(angle)]
 
 // inscribedPolygons.js
 function setup() {
   createCanvas(windowWidth, windowHeight)
   background('black')
 
-  const NUM_VERTEX = 3
-  const NUM_POLYGONS = NUM_VERTEX*2
+  const NUM_VERTEX = 15
+  const NUM_POLYGONS = NUM_VERTEX
   const INITIAL_ROTATION = Math.PI/2
   const INITIAL_MARGIN = Math.max(Math.min(windowHeight,windowHeight)*0.10, 100)
   const VERTEX_ROTATION = 2*Math.PI/NUM_VERTEX
-  const VERTEX_STEP = 1
+  const VERTEX_STEP = 3
+  const AVERAGE_PROPORTION = 0.5
+
+  const averagePoint = ([point1X, point1Y], [point2X, point2Y]) => (
+    [
+      point1X*AVERAGE_PROPORTION + point2X*(1-AVERAGE_PROPORTION),
+      point1Y*AVERAGE_PROPORTION + point2Y*(1-AVERAGE_PROPORTION)
+    ]
+  )
 
   stroke('white')
   strokeWeight(3)
