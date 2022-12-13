@@ -1,4 +1,4 @@
-const toRadialCoordinates = (x,y) => [Math.sqrt(x**2 + y**2), Math.atan(y/x)]
+const toRadialCoordinates = (x,y) => [dist(x,y,0,0), Math.atan(y/x)]
 const toCartesianCoordinates = (r,angle) => [r*Math.cos(angle), r*Math.sin(angle)]
 
 // inscribedPolygons.js

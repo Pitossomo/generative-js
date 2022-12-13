@@ -1,11 +1,14 @@
 // fibonacciTree.js
 function setup() {
-  createCanvas(windowWidth, windowHeight)
+  const canvasWrapper = document.querySelector('.canvasWrapper')
+  console.log(canvasWrapper)
+  createCanvas(canvasWrapper.offsetWidth, canvasWrapper.offsetHeight)
+    .parent(canvasWrapper)
   background('black')
   stroke('white')
 
   const MAX_GENERATIONS = 15
-  const DX = windowWidth/(MAX_GENERATIONS+1)
+  const DX = canvasWrapper.offsetWidth/(MAX_GENERATIONS+1)
 
   class FibPoint {
     constructor(age, root, generation, y) {
@@ -28,7 +31,7 @@ function setup() {
     age = 0,
     root = null,
     generation = 0,
-    y = 1*windowHeight/2
+    y = 1*canvasWrapper.offsetHeight/2
   )
   initialRoot.draw()
   let generations = [[initialRoot]]
@@ -39,7 +42,7 @@ function setup() {
       ? 1
       : generations[generation-1].length + generations[generation-2].length
 
-    const dy = windowHeight/(totalParallels + 1)
+    const dy = canvasWrapper.offsetHeight/(totalParallels + 1)
 
     generations[generation-1].forEach((root, j) => {
       const parallelIndex = newGeneration.length + 1
