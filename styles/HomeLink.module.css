@@ -1,0 +1,13 @@
+.backlink {
+  position: fixed;
+  background-color: rgba(30,30,30,0.8);
+  color: #ccc;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  margin: 6px;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  border-radius: 50%;
+}

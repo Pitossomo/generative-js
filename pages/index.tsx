@@ -25,8 +25,6 @@ export default function Home() {
           <Link
             href="/arts/fibonacciTree"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
               Árvore de Fibonacci <span>-&gt;</span>
@@ -39,8 +37,6 @@ export default function Home() {
           <Link
             href="/arts/inscribedPolygons"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
               Polígonos Inscritos <span>-&gt;</span>
@@ -53,8 +49,6 @@ export default function Home() {
           <Link
             href="/arts/linesMovement"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
               Linhas em movimento <span>-&gt;</span>
@@ -67,8 +61,6 @@ export default function Home() {
           <Link
             href="/arts/spiral"
             className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
               Espiral <span>-&gt;</span>
