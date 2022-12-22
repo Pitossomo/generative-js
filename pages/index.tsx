@@ -17,10 +17,11 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.center}>
           <h1>Arte Generativa</h1>
-          <br />
-          <p>com p5.js</p>
         </div>
-
+        <div className={styles.subtitles}>
+          <p>feito com p5.js</p>
+          <p><Link href='https://github.com/Pitossomo' target='_blank'>por @Pitossomo</Link></p>
+        </div>
         <div className={styles.grid}>
           <Link
             href="/arts/fibonacciTree"
