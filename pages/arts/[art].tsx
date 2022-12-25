@@ -1,13 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 import HomeLink from "../../components/HomeLink"
-import dynamic from 'next/dynamic'
 import p5Types from "p5"; //Import this for typechecking and intellisense
-
-const Sketch = dynamic(
-  () => import('react-p5').then((mod) => mod.default),
-  { ssr: false }
-)
 
 const Arts = () => {
   const router = useRouter()
@@ -43,7 +37,6 @@ const Arts = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLink />
-      <Sketch setup={setup} draw={draw} />
     </>
   )
 }
