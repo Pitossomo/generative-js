@@ -65,7 +65,9 @@ const FibonacciSketch = () => {
   
     p5.noLoop()
   }
-  return <BaseSketch setup={setup} />
+  return <BaseSketch setup={setup} draw={function (p5: p5Types): void {
+    throw new Error("Function not implemented.");
+  } } />
 }
 
 export default FibonacciSketch
