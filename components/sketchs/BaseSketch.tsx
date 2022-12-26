@@ -8,7 +8,7 @@ const Sketch = dynamic(
 
 interface IBaseSketchProps {
   setup: ((p5: p5Types, canvasParentRef: Element) => void),
-  draw: ((p5: p5Types) => void)
+  draw?: ((p5: p5Types) => void)
 }
 
 const BaseSketch = ({setup, draw}: IBaseSketchProps) => {

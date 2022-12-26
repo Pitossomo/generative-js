@@ -2,8 +2,7 @@ import BaseSketch from "./BaseSketch"
 import p5Types from "p5"; //Import this for typechecking and intellisense
 
 const FibonacciSketch = () => {
-  const WIDTH = 1000
-  const HEIGHT = 800
+  const [WIDTH, HEIGHT] = [1000, 800]
   function setup(p5: p5Types, canvasParentRef: Element) {
     const canvasWrapper = document.querySelector('.canvasWrapper')
     console.log(canvasWrapper)
@@ -65,9 +64,7 @@ const FibonacciSketch = () => {
   
     p5.noLoop()
   }
-  return <BaseSketch setup={setup} draw={function (p5: p5Types): void {
-    throw new Error("Function not implemented.");
-  } } />
+  return <BaseSketch setup={setup} />
 }
 
 export default FibonacciSketch

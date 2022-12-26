@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 import HomeLink from "../../components/HomeLink"
-import FibonacciSketch from "../../components/sketchs/FibonacciSketch";
+import SketchSwitch from "../../components/sketchs/SketchSwitch";
 
 const Arts = () => {
   const router = useRouter()
@@ -15,7 +15,7 @@ const Arts = () => {
       : word.toUpperCase()
     ).join(' ')
   )
-
+  
   return (
     <>
       <Head>
@@ -25,7 +25,7 @@ const Arts = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLink />
-      <FibonacciSketch />
+      { art ? <SketchSwitch art={art} /> : null }
     </>
   )
 }

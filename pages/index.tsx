@@ -52,7 +52,7 @@ export default function Home() {
             className={styles.card}
           >
             <h2 className={inter.className}>
-              Linhas em movimento <span>-&gt;</span>
+              Linhas em movimento (ToDo)<span>-&gt;</span>
             </h2>
             <p className={inter.className}>
               Segmentos de retas em movimento aleatório
