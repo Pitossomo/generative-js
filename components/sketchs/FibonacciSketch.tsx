@@ -1,12 +1,5 @@
-// fibonacciTree.js
-import dynamic from 'next/dynamic'
-import p5Types from "p5";
-
-const Sketch = dynamic(
-  () => import('react-p5').then((mod) => mod.default),
-  { ssr: false }
-)
-
+import BaseSketch from "./BaseSketch"
+import p5Types from "p5"; //Import this for typechecking and intellisense
 
 const FibonacciSketch = () => {
   const WIDTH = 1000
@@ -23,13 +16,13 @@ const FibonacciSketch = () => {
   
     class FibPoint {
       age: number;
-      root: FibPoint;
+      root: FibPoint | null;
       x: number;
       y: number;
       draw: () => void;
-      constructor(age: number, root: FibPoint, generation: number, y: number) {
+      constructor(age: number, root: FibPoint | null, generation: number, y: number) {
         this.age = age
-        this.root = root
+        this.root = root 
         this.x = (generation+1)*DX
         this.y = y
   
@@ -43,22 +36,17 @@ const FibonacciSketch = () => {
       }
     }
   
-    const initialRoot = new FibPoint(
-      age = 0,
-      root = null,
-      generation = 0,
-      y = 1*canvasWrapper.offsetHeight/2
-    )
+    const initialRoot = new FibPoint(0, null, 0, HEIGHT/2)
     initialRoot.draw()
     let generations = [[initialRoot]]
   
     for (let generation = 1; generation < MAX_GENERATIONS; generation++) {
-      let newGeneration = []
+      let newGeneration: FibPoint[] = []
       const totalParallels = (generation < 2) 
         ? 1
         : generations[generation-1].length + generations[generation-2].length
   
-      const dy = canvasWrapper.offsetHeight/(totalParallels + 1)
+      const dy = HEIGHT/(totalParallels + 1)
   
       generations[generation-1].forEach((root, j) => {
         const parallelIndex = newGeneration.length + 1
@@ -75,9 +63,9 @@ const FibonacciSketch = () => {
       generations.push(newGeneration)      
     }
   
-    noLoop()
+    p5.noLoop()
   }
-  return <Sketch setup={setup} draw={draw} />
+  return <BaseSketch setup={setup} />
 }
 
 export default FibonacciSketch

@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 import HomeLink from "../../components/HomeLink"
-import p5Types from "p5"; //Import this for typechecking and intellisense
+import FibonacciSketch from "../../components/sketchs/FibonacciSketch";
 
 const Arts = () => {
   const router = useRouter()
@@ -16,18 +16,6 @@ const Arts = () => {
     ).join(' ')
   )
 
-  let [x, y] = [50, 50]; 
-
-  const setup = (p5: p5Types, canvasParentRef: Element) => {
-		p5.createCanvas(500, 500).parent(canvasParentRef);
-	};
-
-	const draw = (p5: p5Types) => {
-		p5.background(0);
-		p5.ellipse(x, y, 70, 70);
-		x++;
-	};
-
   return (
     <>
       <Head>
@@ -37,6 +25,7 @@ const Arts = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLink />
+      <FibonacciSketch />
     </>
   )
 }
