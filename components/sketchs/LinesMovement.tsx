@@ -20,22 +20,20 @@ const LinesMovement = () => {
   var baseLight: number
 
   function setup(p5: p5Types, canvasParentRef: Element) {
-    const [WIDTH, HEIGHT] = [1000, 800]
-  
     num_entities = Math.floor(p5.random(10, 30))
     max_dist_variation = 5
     max_hue_variation = 1
     baseSaturation = 80
     baseLight = 80
 
-    p5.createCanvas(WIDTH, HEIGHT)
+    p5.createCanvas(p5.windowWidth, p5.windowHeight)
 
     for (let i = 0; i < num_entities; i++) {
       entities.push({
-        x1: p5.random(WIDTH),
-        y1: p5.random(HEIGHT),
-        x2: p5.random(WIDTH),
-        y2: p5.random(HEIGHT),
+        x1: p5.random(p5.windowWidth),
+        y1: p5.random(p5.windowHeight),
+        x2: p5.random(p5.windowWidth),
+        y2: p5.random(p5.windowHeight),
         hue: p5.random(100)
       })
       p5.colorMode(p5.HSB, 100)

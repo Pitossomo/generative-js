@@ -2,16 +2,16 @@ import BaseSketch from "./BaseSketch"
 import p5Types from "p5"; //Import this for typechecking and intellisense
 
 const FibonacciSketch = () => {
-  const [WIDTH, HEIGHT] = [1000, 800]
   function setup(p5: p5Types, canvasParentRef: Element) {
     const canvasWrapper = document.querySelector('.canvasWrapper')
     console.log(canvasWrapper)
-    p5.createCanvas(WIDTH,HEIGHT)
+    p5.createCanvas(p5.windowWidth,p5.windowHeight
+      )
     p5.background('black')
     p5.stroke('white')
   
     const MAX_GENERATIONS = 15
-    const DX = WIDTH/(MAX_GENERATIONS+1)
+    const DX = p5.windowWidth/(MAX_GENERATIONS+1)
   
     class FibPoint {
       age: number;
@@ -35,7 +35,8 @@ const FibonacciSketch = () => {
       }
     }
   
-    const initialRoot = new FibPoint(0, null, 0, HEIGHT/2)
+    const initialRoot = new FibPoint(0, null, 0, p5.windowHeight
+      /2)
     initialRoot.draw()
     let generations = [[initialRoot]]
   
@@ -45,7 +46,8 @@ const FibonacciSketch = () => {
         ? 1
         : generations[generation-1].length + generations[generation-2].length
   
-      const dy = HEIGHT/(totalParallels + 1)
+      const dy = p5.windowHeight
+      /(totalParallels + 1)
   
       generations[generation-1].forEach((root, j) => {
         const parallelIndex = newGeneration.length + 1

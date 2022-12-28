@@ -3,15 +3,14 @@ import BaseSketch from "./BaseSketch"
 import p5Types from "p5"; //Import this for typechecking and intellisense
 
 const InscribedPolygonsSketch = () => {
-  const [WIDTH, HEIGHT] = [1000, 800]
   function setup(p5: p5Types, canvasParentRef: Element) {
-    p5.createCanvas(WIDTH, HEIGHT)
+    p5.createCanvas(p5.windowWidth, p5.windowHeight)
     p5.background('black')
 
     const NUM_VERTEX = 15
     const NUM_POLYGONS = NUM_VERTEX
     const INITIAL_ROTATION = Math.PI/2
-    const INITIAL_MARGIN = Math.max(Math.min(HEIGHT,HEIGHT)*0.10, 100)
+    const INITIAL_MARGIN = Math.max(Math.min(p5.windowHeight,p5.windowHeight)*0.10, 100)
     const VERTEX_ROTATION = 2*Math.PI/NUM_VERTEX
     const VERTEX_STEP = 3
     const AVERAGE_PROPORTION = 0.5
@@ -27,10 +26,10 @@ const InscribedPolygonsSketch = () => {
     p5.strokeWeight(3)
 
     let points: number[][][] = [[]]
-    const ro = Math.min(HEIGHT, WIDTH)/2 - INITIAL_MARGIN
+    const ro = Math.min(p5.windowHeight, p5.windowWidth)/2 - INITIAL_MARGIN
     for (let i = 0; i < NUM_VERTEX; i++) {
       const point = toCartesian(ro, VERTEX_ROTATION*i - INITIAL_ROTATION) 
-      points[0].push([point[0] + WIDTH/2, point[1] + HEIGHT/2])
+      points[0].push([point[0] + p5.windowWidth/2, point[1] + p5.windowHeight/2])
     }
 
     for (let j = 0; j < NUM_POLYGONS; j++) {
