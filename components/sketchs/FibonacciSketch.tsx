@@ -5,8 +5,7 @@ const FibonacciSketch = () => {
   function setup(p5: p5Types, canvasParentRef: Element) {
     const canvasWrapper = document.querySelector('.canvasWrapper')
     console.log(canvasWrapper)
-    p5.createCanvas(p5.windowWidth,p5.windowHeight
-      )
+    p5.createCanvas(p5.windowWidth,p5.windowHeight)
     p5.background('black')
     p5.stroke('white')
   
