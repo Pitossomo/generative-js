@@ -1,8 +1,9 @@
+import { RefObject } from "react";
 import { toCartesian } from "../../utils/polarCoordinates";
 import { BaseSketch } from "./BaseSketch"
-import p5Types from "p5"; //Import this for typechecking and intellisense
+import p5 from "p5";
 
-const InscribedPolygonsSketch = () => {
+const InscribedPolygons = () => {
   const NUM_VERTEX = 15
   const NUM_POLYGONS = NUM_VERTEX
   const INITIAL_ROTATION= Math.PI/2
@@ -11,12 +12,13 @@ const InscribedPolygonsSketch = () => {
   const VERTEX_STEP = 3
   const AVERAGE_PROPORTION = 0.5
 
-  function setup(p: p5Types) {
-    p.createCanvas(p.windowWidth, p.windowHeight)
-    p.noLoop()
+  function setup (p: p5, parentRef: RefObject<HTMLDivElement>) {
+    const cnv = p.createCanvas(p.windowWidth,p.windowHeight)
+    if (parentRef.current) cnv.parent(parentRef.current)
+    console.log('setup')
   }
 
-  function draw(p: p5Types) {
+  function draw(p: p5) {
     p.background('black')
 
     const averagePoint = ([point1X, point1Y]: number[], [point2X, point2Y]: number[]) => (
@@ -47,10 +49,9 @@ const InscribedPolygonsSketch = () => {
       })
       points.push(newPoints)
     }
-
   }
 
   return <BaseSketch setup={setup} draw={draw} />
 }
 
-export default InscribedPolygonsSketch
+export default InscribedPolygons
