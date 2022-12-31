@@ -1,13 +1,12 @@
-import dynamic from "next/dynamic";
 import { Component, createRef } from "react";
 import p5 from "p5"; 
 
-interface IBaseSketchProps {
+export interface IBaseSketchProps {
   setup: (p: p5) => void
   draw: (p: p5) => void
 }
 
-class BaseSketch extends Component {
+export class BaseSketch extends Component<IBaseSketchProps> {
   myRef: any;
   myP5?: p5;
   setup?: any;
@@ -19,14 +18,8 @@ class BaseSketch extends Component {
   }
 
   sketch = (p: p5) => {
-    p.setup = () => {
-      p.createCanvas(400,400);
-    }
-  
-    p.draw = () => {
-      p.background(220);
-      p.ellipse(50,50,80,80)
-    }
+    p.setup = this.setup
+    p.draw = this.draw
   }
 
   componentDidMount() {
@@ -37,5 +30,3 @@ class BaseSketch extends Component {
     return <div ref={this.myRef}></div>
   }
 }
-
-export default BaseSketch

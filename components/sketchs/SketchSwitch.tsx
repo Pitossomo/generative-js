@@ -1,16 +1,25 @@
-import BaseSketch from "./BaseSketch"
+import dynamic from "next/dynamic"
+import { SKETCHES } from "../../sketchesMetadata"
 
-type ISketchSwitch = { art: string}
+type ISketchSwitch = { url: string}
 
-const SketchSwitch = ({art}: ISketchSwitch) => {
-  /*switch (art) {
-    case 'fibonacciTree': return <FibonacciSketch />
-    case 'inscribedPolygons': return <InscribedPolygonsSketch />
-    case 'spiral': return <SpiralSketch />
-    case 'linesMovement': return <LinesMovement />
-    default: return null;
-  }*/
-  return <BaseSketch />
+
+const SketchSwitch = ({url}: ISketchSwitch) => {
+  console.log(url)
+  const sketchData = SKETCHES.find(s => s.url === url)
+
+  if (!sketchData?.componentName) return null
+
+
+  const Sketch = dynamic(
+    () => import(`../sketchs/${sketchData?.componentName}`).then(mod => mod.default),
+    {
+      ssr: false,
+      loading: () => <h1>Loading...</h1>
+    }
+  )
+  
+  return <Sketch />
 }
 
 export default SketchSwitch

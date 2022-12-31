@@ -25,7 +25,7 @@ const Arts = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeLink />
-      { art ? <SketchSwitch art={art} /> : null }
+      { art ? <SketchSwitch url={art} /> : null }
     </>
   )
 }

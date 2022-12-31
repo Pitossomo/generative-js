@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { SKETCHES } from '../sketchesMetadata'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,53 +24,17 @@ export default function Home() {
           <p><Link href='https://github.com/Pitossomo' target='_blank'>por @Pitossomo</Link></p>
         </div>
         <div className={styles.grid}>
-          <Link
-            href="/arts/fibonacciTree"
-            className={styles.card}
-          >
-            <h2 className={inter.className}>
-              Árvore de Fibonacci <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Ramificações crescentes e sucessivas partindo de um único ponto
-            </p>
-          </Link>
-
-          <Link
-            href="/arts/inscribedPolygons"
-            className={styles.card}
-          >
-            <h2 className={inter.className}>
-              Polígonos Inscritos <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Polígonos inscritos sucessivamente entre si
-            </p>
-          </Link>
-
-          <Link
-            href="/arts/linesMovement"
-            className={styles.card}
-          >
-            <h2 className={inter.className}>
-              Linhas em movimento (ToDo)<span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Segmentos de retas em movimento aleatório
-            </p>
-          </Link>
-
-          <Link
-            href="/arts/spiral"
-            className={styles.card}
-          >
-            <h2 className={inter.className}>
-              Espiral <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Lugar geométrico dos pontos com ângulo e distância crescentes em relação à origem
-            </p>
-          </Link>
+          { SKETCHES.map(s => (
+            <Link key={s.url} href ={`/arts/${s.url}`} className={styles.card}>
+              <h2 className={inter.className}>
+                { s.title } 
+                <span>-&gt;</span>
+              </h2>
+              <p className={inter.className}>
+                { s.description }
+              </p>
+            </Link>
+          ))}
         </div>
       </main>
     </>
