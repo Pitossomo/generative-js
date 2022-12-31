@@ -1,9 +1,12 @@
+import { RefObject } from "react";
 import { BaseSketch } from "./BaseSketch";
 import p5 from "p5";
 
 const FibonacciTree = () => {
-  function setup (p: p5) {
-    p.createCanvas(p.windowWidth,p.windowHeight)
+  function setup (p: p5, parentRef: RefObject<HTMLDivElement>) {
+    const cnv = p.createCanvas(p.windowWidth,p.windowHeight)
+    if (parentRef.current) cnv.parent(parentRef.current)
+    console.log('setup')
   }
 
   function draw (p: p5) {

@@ -1,32 +1,36 @@
-import { Component, createRef } from "react";
+import { Component, RefObject, createRef } from "react";
 import p5 from "p5"; 
 
 export interface IBaseSketchProps {
-  setup: (p: p5) => void
+  setup: (p: p5, parentRef: RefObject<HTMLDivElement>) => void
   draw: (p: p5) => void
 }
 
 export class BaseSketch extends Component<IBaseSketchProps> {
-  myRef: any;
-  myP5?: p5;
-  setup?: any;
-  draw?: any;
-  
+  parentRef: RefObject<HTMLDivElement>;
+  sketch!: p5;
+
   constructor(props: IBaseSketchProps) {
     super(props);
-    this.myRef = createRef()
+    this.parentRef = createRef()
   }
 
-  sketch = (p: p5) => {
-    p.setup = this.setup
-    p.draw = this.draw
+  componentDidMount(): void {
+    this.sketch = new p5((p) => {
+      p.setup = () => { this.props.setup(p, this.parentRef) }
+      p.draw = () => { this.props.draw(p) }
+    })
   }
 
-  componentDidMount() {
-    this.myP5 = new p5(this.sketch, this.myRef.current)
+  shouldComponentUpdate(): boolean {
+    return false;
   }
 
+  componentWillUnmount(): void {
+    this.sketch.remove();
+  }
+  
   render() {
-    return <div ref={this.myRef}></div>
+    return <div ref={this.parentRef} />
   }
 }
