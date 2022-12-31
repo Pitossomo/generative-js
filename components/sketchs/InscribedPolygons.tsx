@@ -15,7 +15,7 @@ const InscribedPolygons = () => {
   function setup (p: p5, parentRef: RefObject<HTMLDivElement>) {
     const cnv = p.createCanvas(p.windowWidth,p.windowHeight)
     if (parentRef.current) cnv.parent(parentRef.current)
-    console.log('setup')
+    p.noLoop()
   }
 
   function draw(p: p5) {
