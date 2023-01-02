@@ -10,7 +10,8 @@ const SketchSwitch = ({url}: ISketchSwitch) => {
   if (!sketchData?.componentName) return null
 
   const Sketch = dynamic(
-    () => import(`./${sketchData?.componentName}`).then(mod => mod.default),
+    () => import(`./${sketchData?.componentName}/${sketchData?.componentName}`)
+      .then(mod => mod.default),
     {
       ssr: false,
       loading: () => <h1>Loading...</h1>

@@ -1,5 +1,6 @@
 import { Component, RefObject, createRef } from "react";
-import p5 from "p5"; 
+import p5 from "p5";
+import styles from '../../styles/BaseSketch.module.css'
 
 export interface IBaseSketchProps {
   setup: (p: p5, parentRef: RefObject<HTMLDivElement>) => void
@@ -31,6 +32,6 @@ export class BaseSketch extends Component<IBaseSketchProps> {
   }
   
   render() {
-    return <div ref={this.parentRef} />
+    return <div className={styles.canvasWrapper} ref={this.parentRef} />
   }
 }
