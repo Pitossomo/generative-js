@@ -2,14 +2,13 @@ import { RefObject } from "react";
 import { BaseSketch } from "../BaseSketch";
 import p5 from "p5";
 import { FibPoint } from "./FibPoint";
-
-type P5Input = p5.Element & {input?: Function, changed?:Function, checked?: Function}
+import { P5Input } from "../../../types/P5Input";
 
 const FibonacciTree = () => {
-  var generationsSlider: P5Input;
+  var generationsSlider: P5Input
   var pointsCheckBox: P5Input
 
-  function setup (p: p5, parentRef: RefObject<HTMLDivElement>) {
+  function setup (p: p5, parentRef: RefObject<HTMLDivElement>): void {
     const cnv = p.createCanvas(p.windowWidth,p.windowHeight)
     if (parentRef.current) cnv.parent(parentRef.current)
 
