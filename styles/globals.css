@@ -9,6 +9,8 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
+  --slider-width: 160px;
+
   --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,
@@ -105,4 +107,15 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+input[type="range"] {
+  width: var(--slider-width)
+}
+
+.datalist {
+  list-style: none;
+  display: flex;
+  width: var(--slider-width);
+  justify-content: space-between;
 }
