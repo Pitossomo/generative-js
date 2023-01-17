@@ -9,10 +9,9 @@ const InscribedPolygons = () => {
   var numVerticesSlider: P5Input
   var numPolygonsSlider: P5Input
   var initialRotationSlider: P5Input
+  var averageProportionSlider: P5Input
   const INITIAL_MARGIN = 100
-  const VERTEX_ROTATION = 2*Math.PI/4
   const VERTEX_STEP = 1
-  const AVERAGE_PROPORTION = 0.5
 
   function setup (p: p5, parentRef: RefObject<HTMLDivElement>) {
     const cnv = p.createCanvas(p.windowWidth,p.windowHeight)
@@ -40,6 +39,13 @@ const InscribedPolygons = () => {
       min: 0, max: 360, step: 1, default: 45,
       label: 'Initial Rotation'
     })
+
+    averageProportionSlider = createInput(xForm, 230, p, {
+      name: 'proportion',
+      type: 'SLIDER',
+      min: 0, max: 1, step: 0.01, default: 0.5,
+      label: 'Segment division'
+    })
   }
 
   function draw(p: p5) {
@@ -48,6 +54,7 @@ const InscribedPolygons = () => {
     const NUM_POLYGONS = Number(numPolygonsSlider.value())
     const NUM_VERTICES = Number(numVerticesSlider.value())
     const INITIAL_ROTATION = Number(initialRotationSlider.value())*Math.PI/180
+    const AVERAGE_PROPORTION = Number(averageProportionSlider.value())
   
     const averagePoint = ([point1X, point1Y]: number[], [point2X, point2Y]: number[]) => (
       [
@@ -61,8 +68,8 @@ const InscribedPolygons = () => {
 
     let points: number[][][] = [[]]
     const ro = Math.min(p.windowHeight, p.windowWidth)/2 - INITIAL_MARGIN
-    for (let i = 0; i < 15; i++) {
-      const point = toCartesian(ro, VERTEX_ROTATION*i - INITIAL_ROTATION) 
+    for (let i = 0; i < NUM_VERTICES; i++) {
+      const point = toCartesian(ro, (2*Math.PI/NUM_VERTICES)*i - INITIAL_ROTATION) 
       points[0].push([point[0] + p.windowWidth/2, point[1] + p.windowHeight/2])
     }
 

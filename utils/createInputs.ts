@@ -20,13 +20,13 @@ const create = (p: p5, input: IInput): P5Input => {
 } 
 
 const findStep = (variation: number, step: number): number => {
-  step = Math.max(step, Math.ceil(variation/5))
-  let numSteps = variation/step
+  let suggestedStep = Math.max(step, Math.ceil(variation/5))
+  let numSteps = variation/suggestedStep
   while (numSteps%1) {
-    step--
-    numSteps = variation/step
+    suggestedStep++
+    numSteps = variation/suggestedStep
   }
-  return step
+  return suggestedStep
 }
 
 export const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5Input => {
