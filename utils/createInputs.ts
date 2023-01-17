@@ -1,6 +1,5 @@
 import p5 from "p5";
 import { P5Input } from "../types/P5Input"
-import { createElement } from "react";
 
 export interface IInput {
   type: string,
@@ -42,7 +41,6 @@ export const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5
   if (inputProps.type === 'SLIDER') {
     const datalist = p.createElement('ul').position(x,y+40).class('datalist')
     const [min, max] = [inputProps.min || 0, inputProps.max || 100]
-
 
     for (let i = min; i <= max; i+= findStep(max - min, inputProps.step || 1)) {
       datalist.child(p.createElement('li',i.toString()).addClass('datalist-item'))

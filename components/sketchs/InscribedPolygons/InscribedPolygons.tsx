@@ -8,7 +8,7 @@ import { createInput } from "../../../utils/createInputs";
 const InscribedPolygons = () => {
   var numVerticesSlider: P5Input
   var numPolygonsSlider: P5Input
-  const INITIAL_ROTATION= Math.PI/2
+  var initialRotationSlider: P5Input
   const INITIAL_MARGIN = 100
   const VERTEX_ROTATION = 2*Math.PI/4
   const VERTEX_STEP = 1
@@ -27,11 +27,18 @@ const InscribedPolygons = () => {
       label: 'Number of Vertices'
     })
 
-    numPolygonsSlider = createInput(xForm, 100, p, {
+    numPolygonsSlider = createInput(xForm, 110, p, {
       name: 'polygons',
       type: 'SLIDER',
       min: 1, max: 20, step: 1, default: 5,
       label: 'Number of Polygons'
+    })
+
+    initialRotationSlider = createInput(xForm, 170, p, {
+      name: 'rotation',
+      type: 'SLIDER',
+      min: 0, max: 360, step: 1, default: 45,
+      label: 'Initial Rotation'
     })
   }
 
@@ -40,6 +47,7 @@ const InscribedPolygons = () => {
 
     const NUM_POLYGONS = Number(numPolygonsSlider.value())
     const NUM_VERTICES = Number(numVerticesSlider.value())
+    const INITIAL_ROTATION = Number(initialRotationSlider.value())*Math.PI/180
   
     const averagePoint = ([point1X, point1Y]: number[], [point2X, point2Y]: number[]) => (
       [
