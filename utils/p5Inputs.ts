@@ -29,7 +29,7 @@ const findStep = (variation: number, step: number): number => {
   return suggestedStep
 }
 
-export const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5Input => {
+const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5Input => {
   if (inputProps.type !== 'CHECKBOX') {
     p.createP(inputProps.label).position(x, y)
   }
@@ -48,4 +48,10 @@ export const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5
   } 
 
   return element
+}
+
+export const createInputs = (x0: number, y0: number, p: p5, inputs: IInput[]): Record<string,P5Input> => {
+  const inputsByName: Record<string, P5Input> = {}
+  inputs.forEach((input, j) => inputsByName[input.name] = createInput(x0, y0 + j*30, p, input))
+  return inputsByName
 }

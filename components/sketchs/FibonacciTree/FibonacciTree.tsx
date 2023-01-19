@@ -3,9 +3,10 @@ import { BaseSketch } from "../BaseSketch";
 import p5 from "p5";
 import { FibPoint } from "./FibPoint";
 import { P5Input } from "../../../types/P5Input";
-import { createInput } from "../../../utils/createInputs";
+import { createInputs } from "../../../utils/p5Inputs";
+import { ISketchProps } from "../SketchSwitch";
 
-const FibonacciTree = () => {
+const FibonacciTree = ({inputs}: ISketchProps) => {
   var generationsSlider: P5Input
   var pointsCheckBox: P5Input
 
@@ -14,19 +15,10 @@ const FibonacciTree = () => {
     if (parentRef.current) cnv.parent(parentRef.current)
 
     const xForm = p.windowWidth-250
+    const yForm = 50
     
-    generationsSlider = createInput(xForm, 50, p, {
-      name: 'generations',
-      min: 2, max: 20, default: 10, step: 1, 
-      label: 'Number of generations',
-      type: 'SLIDER'
-    })
-
-    pointsCheckBox = createInput(xForm, 90, p, {
-      name: 'showPoints',
-      label: 'Show points',
-      type: 'CHECKBOX'
-    })
+    const savedInputs = createInputs(xForm, yForm, p, inputs)
+    generationsSlider = savedInputs[0], pointsCheckBox = savedInputs[1]
     p.noLoop()
   }
 

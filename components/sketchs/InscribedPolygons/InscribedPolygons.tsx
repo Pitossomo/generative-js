@@ -3,9 +3,10 @@ import { toCartesian } from "../../../utils/polarCoordinates";
 import { BaseSketch } from "../BaseSketch"
 import p5 from "p5";
 import { P5Input } from "../../../types/P5Input";
-import { createInput } from "../../../utils/createInputs";
+import { createInputs } from "../../../utils/p5Inputs";
+import { ISketchProps } from "../SketchSwitch";
 
-const InscribedPolygons = () => {
+const InscribedPolygons = ({inputs}: ISketchProps) => {
   var numVerticesSlider: P5Input
   var numPolygonsSlider: P5Input
   var initialRotationSlider: P5Input
@@ -19,36 +20,14 @@ const InscribedPolygons = () => {
     p.noLoop()
     
     const xForm = p.windowWidth-250
-    numVerticesSlider = createInput(xForm, 50, p, {
-      name: 'vertices',
-      type: 'SLIDER',
-      min: 2, max: 20, step: 1, default: 15,
-      label: 'Number of Vertices'
-    })
+    const yForm = 50
+    const savedInputs = createInputs(xForm, yForm, p, inputs)
+    numVerticesSlider = savedInputs[0]
+    numPolygonsSlider = savedInputs[1]
+    initialRotationSlider = savedInputs[2]
+    averageProportionSlider = savedInputs[3]
 
-    numPolygonsSlider = createInput(xForm, 110, p, {
-      name: 'polygons',
-      type: 'SLIDER',
-      min: 1, max: 20, step: 1, default: 5,
-      label: 'Number of Polygons'
-    })
-
-    initialRotationSlider = createInput(xForm, 170, p, {
-      name: 'rotation',
-      type: 'SLIDER',
-      min: 0, max: 360, step: 1, default: 45,
-      label: 'Initial Rotation'
-    })
-
-    averageProportionSlider = createInput(xForm, 230, p, {
-      name: 'proportion',
-      type: 'SLIDER',
-      min: 0, max: 1, step: 0.01, default: 0.5,
-      label: 'Segment division'
-    })
-  }
-
-  function draw(p: p5) {
+    function draw(p: p5) {
     p.background('black')
 
     const NUM_POLYGONS = Number(numPolygonsSlider.value())
