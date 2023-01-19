@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
-import HomeLink from "../../components/HomeLink"
-import SketchSwitch from "../../components/sketchs/SketchSwitch";
+import HomeLink from "../../src/components/HomeLink"
+import SketchSwitch from "../../src/components/sketchs/SketchSwitch";
 
 const Arts = () => {
   const router = useRouter()

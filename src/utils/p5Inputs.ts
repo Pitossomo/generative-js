@@ -20,7 +20,8 @@ const create = (p: p5, input: IInput): P5Input => {
 } 
 
 const findStep = (variation: number, step: number): number => {
-  let suggestedStep = Math.max(step, Math.ceil(variation/5))
+  const MAX_TICKS = 5
+  let suggestedStep = Math.max(step, Math.ceil(variation/(MAX_TICKS - 1)))
   let numSteps = variation/suggestedStep
   while (numSteps%1) {
     suggestedStep++
@@ -52,6 +53,6 @@ const createInput = (x: number, y: number, p: p5, inputProps: IInput): P5Input =
 
 export const createInputs = (x0: number, y0: number, p: p5, inputs: IInput[]): Record<string,P5Input> => {
   const inputsByName: Record<string, P5Input> = {}
-  inputs.forEach((input, j) => inputsByName[input.name] = createInput(x0, y0 + j*30, p, input))
+  inputs.forEach((input, j) => inputsByName[input.name] = createInput(x0, y0 + j*80, p, input))
   return inputsByName
 }
