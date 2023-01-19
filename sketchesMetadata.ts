@@ -1,4 +1,4 @@
-import { IInput } from "./utils/p5Inputs"
+import { IInput } from "./src/utils/p5Inputs" 
 
 interface ISketchMetadata {
   url: string,
@@ -37,19 +37,19 @@ export const SKETCHES: ISketchMetadata[] = [
       {
         name: 'vertices',
         type: 'SLIDER',
-        min: 2, max: 20, step: 1, default: 15,
+        min: 3, max: 15, step: 1, default: 6,
         label: 'Number of Vertices'
       },
       {
         name: 'polygons',
         type: 'SLIDER',
-        min: 1, max: 20, step: 1, default: 5,
+        min: 1, max: 50, step: 1, default: 10,
         label: 'Number of Polygons'
       },
       {
         name: 'rotation',
         type: 'SLIDER',
-        min: 0, max: 360, step: 1, default: 45,
+        min: -180, max: 180, step: 1, default: 0,
         label: 'Initial Rotation'
       },
       {
