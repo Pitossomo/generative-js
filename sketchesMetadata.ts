@@ -72,6 +72,19 @@ export const SKETCHES: ISketchMetadata[] = [
     title: 'Espiral',
     componentName: 'Spiral',
     description: 'Lugar geométrico dos pontos com ângulo e distância crescentes em relação à origem',
-    inputs: []  
+    inputs: [
+      {
+        name: 'numPoints',
+        type: 'SLIDER',
+        min: 3, max: 400, step: 1, default: 200,
+        label: 'Number of Points'
+      },
+      {
+        name: 'rounds',
+        type: 'SLIDER',
+        min: 1, max: 20, step: 1, default: 5,
+        label: 'Number of Rounds'
+      },
+    ]
   }
 ]
