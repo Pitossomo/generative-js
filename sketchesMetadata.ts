@@ -65,7 +65,38 @@ export const SKETCHES: ISketchMetadata[] = [
     title: 'Linhas em Movimento',
     componentName: 'LinesMovement',
     description: 'Segmentos de reta em movimentos aleatórios',
-    inputs: []  
+    inputs: [
+      {
+        name: 'entities',
+        type: 'SLIDER',
+        min: 1, max: 50, step: 1, default: 10,
+        label: 'Number of Entities'
+      },
+      {
+        name: 'distanceVariation',
+        type: 'SLIDER',
+        min: 1, max: 100, step: 1, default: 30,
+        label: 'Move Amplitude '
+      },
+      {
+        name: 'hueVariation',
+        type: 'SLIDER',
+        min: 0, max: 1, step: 0.01, default: 0.50,
+        label: 'Hue Variation'
+      },
+      {
+        name: 'baseSaturation',
+        type: 'SLIDER',
+        min: 0, max: 360, step: 1, default: 80,
+        label: 'Base Saturation'
+      },
+      {
+        name: 'baseLight',
+        type: 'SLIDER',
+        min: 0, max: 360, step: 1, default: 80,
+        label: 'Base Light'
+      }
+    ]
   },
   {
     url: 'spiral',
