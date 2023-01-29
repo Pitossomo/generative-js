@@ -69,13 +69,13 @@ export const SKETCHES: ISketchMetadata[] = [
       {
         name: 'entities',
         type: 'SLIDER',
-        min: 1, max: 50, step: 1, default: 10,
+        min: 0, max: 100, step: 1, default: 10,
         label: 'Number of Entities'
       },
       {
-        name: 'distanceVariation',
+        name: 'moveAmplitude',
         type: 'SLIDER',
-        min: 1, max: 100, step: 1, default: 30,
+        min: 0, max: 10, step: 0.1, default: 1,
         label: 'Move Amplitude '
       },
       {
@@ -87,14 +87,20 @@ export const SKETCHES: ISketchMetadata[] = [
       {
         name: 'baseSaturation',
         type: 'SLIDER',
-        min: 0, max: 360, step: 1, default: 80,
+        min: 10, max: 100, step: 1, default: 80,
         label: 'Base Saturation'
       },
       {
         name: 'baseLight',
         type: 'SLIDER',
-        min: 0, max: 360, step: 1, default: 80,
+        min: 10, max: 100, step: 1, default: 80,
         label: 'Base Light'
+      },
+      {
+        name: 'maxSize',
+        type: 'SLIDER',
+        min: 1, max: 1000, step: 1, default: 300,
+        label: 'Maximum Line Size'
       }
     ]
   },
@@ -107,7 +113,7 @@ export const SKETCHES: ISketchMetadata[] = [
       {
         name: 'numPoints',
         type: 'SLIDER',
-        min: 3, max: 400, step: 1, default: 200,
+        min: 10, max: 400, step: 1, default: 200,
         label: 'Number of Points'
       },
       {
