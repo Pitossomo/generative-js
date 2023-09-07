@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import { Inter } from '@next/font/google'
-import styles from '../src/styles/Home.module.css'
-import Link from 'next/link'
-import { SKETCHES } from '../sketchesMetadata'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import styles from "../src/styles/Home.module.css";
+import Link from "next/link";
+import { SKETCHES } from "../sketchesMetadata";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -21,23 +21,24 @@ export default function Home() {
         </div>
         <div className={styles.subtitles}>
           <p>feito com p5.js</p>
-          <p><Link href='https://github.com/Pitossomo' target='_blank'>por @Pitossomo</Link></p>
+          <p>
+            <Link href="https://github.com/Pitossomo" target="_blank">
+              por @Pitossomo
+            </Link>
+          </p>
         </div>
         <div className={styles.grid}>
-          { SKETCHES.map(s => (
-            <Link key={s.url} href ={`/arts/${s.url}`} className={styles.card}>
+          {SKETCHES.map((s) => (
+            <Link key={s.url} href={`/arts/${s.url}`} className={styles.card}>
               <h2 className={inter.className}>
-                { s.title } 
+                {s.title}
                 <span>-&gt;</span>
               </h2>
-              <p className={inter.className}>
-                { s.description }
-              </p>
+              <p className={inter.className}>{s.description}</p>
             </Link>
           ))}
         </div>
       </main>
     </>
-  )
+  );
 }
-
