@@ -180,6 +180,15 @@ export const SKETCHES: ISketchMetadata[] = [
         default: 50,
         label: "Head Size",
       },
+      {
+        name: "armsAngle",
+        type: "SLIDER",
+        min: 0,
+        max: 180,
+        step: 1,
+        default: 90,
+        label: "Arms Angle",
+      },
     ],
   },
 ];
